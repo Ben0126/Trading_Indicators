@@ -1,0 +1,38 @@
+indicator(title="Two DEMA", shorttitle="2 DEMA", overlay=true, timeframe="", timeframe_gaps=true)
+length1 = input.int(144, minval=1)
+length2 = input.int(169, minval=1)
+//length3 = input.int(21, minval=1)
+//length4 = input.int(55, minval=1)
+//length5 = input.int(55, minval=1)
+
+src1 = input(close, title="Source")
+src2 = input(close, title="Source")
+//src3 = input(close, title="Source")
+//src4 = input(close, title="Source")
+//src5 = input(close, title="Source")
+
+e1a = ta.ema(src1, length1)
+e1b = ta.ema(src2, length2)
+//e1c = ta.ema(src3, length3)
+//e1d = ta.ema(src4, length4)
+
+e2a = ta.ema(e1a, length1)
+e2b = ta.ema(e1b, length2)
+//e2c = ta.ema(e1c, length3)
+//e2d = ta.ema(e1d, length4)
+
+dema1 = 2 * e1a - e2a
+dema2 = 2 * e1b - e2b
+//dema3 = 2 * e1c - e2c
+//dema4 = 2 * e1d - e2d
+
+//ema1 = ta.ema(src5, length5)
+
+plot(dema1, "DEMA1", linewidth=1, color=#4943a0)
+plot(dema2, "DEMA2", linewidth=1, color=#c22a19)
+//plot(dema3, "DEMA3", linewidth=1, color=#0000FF)
+//plot(dema4, "DEMA4", linewidth=1, color=#FFFF00)
+//plot(ema1, "EMA1", linewidth=1, color=#40E0D0)
+
+/////////////////////////////////////////////////////
+

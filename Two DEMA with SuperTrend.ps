@@ -1,0 +1,37 @@
+// © Trader_Yeh
+//@version=5
+
+indicator("Two DEMA with SuperTrend",shorttitle="2DEMA_ST", overlay=true, timeframe="", timeframe_gaps=true)
+
+atrPeriod = input(10, "ATR Length")
+factor = input.float(3.0, "Factor", step = 0.01)
+
+[supertrend, direction] = ta.supertrend(factor, atrPeriod)
+
+bodyMiddle = plot((open + close) / 2, display=display.none)
+upTrend = plot(direction < 0 ? supertrend : na, "Up Trend", color = color.green, style=plot.style_linebr)
+downTrend = plot(direction < 0? na : supertrend, "Down Trend", color = color.red, style=plot.style_linebr)
+
+fill(bodyMiddle, upTrend, color.new(color.green, 90), fillgaps=false)
+fill(bodyMiddle, downTrend, color.new(color.red, 90), fillgaps=false)
+
+
+
+//indicator(title="Two DEMA with SuperTrend", shorttitle="2DEMA_ST", overlay=true, timeframe="", timeframe_gaps=true)
+length1 = input.int(144, minval=1)
+length2 = input.int(169, minval=1)
+
+src1 = input(close, title="Source")
+src2 = input(close, title="Source")
+
+e1a = ta.ema(src1, length1)
+e1b = ta.ema(src2, length2)
+e2a = ta.ema(e1a, length1)
+e2b = ta.ema(e1b, length2)
+
+dema1 = 2 * e1a - e2a
+dema2 = 2 * e1b - e2b
+
+plot(dema1, "DEMA1", linewidth=1, color=#4943a0)
+plot(dema2, "DEMA2", linewidth=1, color=#c22a19)
+
